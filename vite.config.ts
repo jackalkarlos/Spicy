@@ -10,9 +10,8 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
     },
     plugins: [react()],
-    base: './', // Electron relative path support
+    base: './',
     define: {
-      // Keys removed for security
     },
     resolve: {
       alias: {
