@@ -1,0 +1,5 @@
+{
+  "name": "Spicy",
+  "description": "A comprehensive connection manager focused on SPICE (Proxmox), with support for RDP, SSH, and VNC.",
+  "requestFramePermissions": []
+}

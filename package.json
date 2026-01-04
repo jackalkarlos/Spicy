@@ -1,0 +1,73 @@
+{
+  "name": "spicy",
+  "productName": "Spicy",
+  "private": true,
+  "version": "1.0.0-unstable",
+  "buildVersion": "2025.01.04-rc",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && npm run build:electron",
+    "preview": "vite preview",
+    "build:electron": "tsc -p electron/tsconfig.json",
+    "start:electron": "npm run build:electron && concurrently \"vite\" \"wait-on tcp:5173 && cross-env NODE_ENV=development electron .\"",
+    "package": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "lucide-react": "^0.469.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "recharts": "^3.6.0",
+    "ssh2": "^1.17.0",
+    "systeminformation": "^5.29.0",
+    "xterm": "^5.3.0",
+    "xterm-addon-fit": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "7zip-bin": "^5.2.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0",
+    "wait-on": "^9.0.3"
+  },
+  "build": {
+    "appId": "com.spicy.app",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "extraFiles": [
+      {
+        "from": "resources/bin",
+        "to": "resources/bin",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "${productName} Setup ${version}.${ext}"
+    }
+  }
+}
